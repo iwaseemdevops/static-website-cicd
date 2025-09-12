@@ -18,7 +18,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t static-website .'
+                    sh 'docker.build('static-website', 'app/')'
                 }
             }
         }
