@@ -48,7 +48,7 @@ pipeline {
                                 # Stop any container using port 8081
                                 docker ps -q --filter "publish=8081" | xargs -r docker stop &&
                                 docker ps -aq --filter "publish=8081" | xargs -r docker rm &&
-                                docker run -d -p 8082:80 --name static-container static-website
+                                docker run -d -p 8081:80 --name static-container static-website
                             '
                         """
                     }
@@ -63,7 +63,7 @@ pipeline {
                     sleep 10
 
                     // Verify the website is accessible
-                    sh "curl -f http://${EC2_HOST}:8082/ || exit 1"
+                    sh "curl -f http://${EC2_HOST}:8081/ || exit 1"
 
                     echo "Deployment verified successfully!"
                 }
