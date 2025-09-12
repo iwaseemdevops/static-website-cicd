@@ -45,7 +45,7 @@ pipeline {
                                 docker load < /home/ec2-user/static-website.tar &&
                                 docker stop static-container || true &&
                                 docker rm static-container || true &&
-                                docker run -d -p 8081:80 --name static-container static-website
+                                docker run -d -p 8082:80 --name static-container static-website
                             '
                         """
                     }
@@ -60,7 +60,7 @@ pipeline {
                     sleep 10
 
                     // Verify the website is accessible
-                    sh "curl -f http://${EC2_HOST}:8081/ || exit 1"
+                    sh "curl -f http://${EC2_HOST}:8082/ || exit 1"
 
                     echo "Deployment verified successfully!"
                 }
