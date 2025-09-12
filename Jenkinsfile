@@ -45,6 +45,9 @@ pipeline {
                                 docker load < /home/ec2-user/static-website.tar &&
                                 docker stop static-container || true &&
                                 docker rm static-container || true &&
+                                # Stop any container using port 8081
+                                docker ps -q --filter "publish=8081" | xargs -r docker stop &&
+                                docker ps -aq --filter "publish=8081" | xargs -r docker rm &&
                                 docker run -d -p 8082:80 --name static-container static-website
                             '
                         """
