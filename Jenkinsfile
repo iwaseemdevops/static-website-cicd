@@ -65,7 +65,7 @@ pipeline {
                     // Verify the website is accessible
                     sh "curl -f http://${EC2_HOST}:8081/ || exit 1"
 
-                    echo "Deployment verified successfully!"
+                    echo "Deployment verified successfully! + Website is accessible."
                 }
             }
         }
